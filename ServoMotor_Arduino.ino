@@ -1,3 +1,8 @@
+/* 
+  In this circuit i use a servo motor.
+  The servo motor moves from 0 degrees to 180 and the other way around.
+*/
+
 #include <Servo.h>
 
 // Initialize Servo object
