@@ -1,3 +1,9 @@
+/* 
+  In this project, i use a liquid crystal display.
+  When the program starts, a message is printed on the display and remains static.
+  A second message is printed throughout the execution of the program.
+*/
+
 #include <LiquidCrystal.h>
 
 // Create a LiquidCrystalObject
