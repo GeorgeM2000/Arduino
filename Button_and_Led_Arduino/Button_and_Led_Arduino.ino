@@ -1,5 +1,5 @@
 /* 
-  In this circuit, i use a button, a led and a pull up resistor.
+  This script is used for a circuit in which i use a button, a led and a pull up resistor.
   When the button is pressed, the led is set to high voltage.
   When the button is not pressed, the led is set to low voltage.
 */
