@@ -1,5 +1,5 @@
 /* 
-  In this circuit i use a servo motor.
+  This script is used for a circuit in which i use a servo motor.
   The servo motor moves from 0 degrees to 180 and the other way around.
 */
 
