@@ -1,5 +1,5 @@
 /* 
-  In this project, i use a liquid crystal display.
+  This script is used for a circuit in which i use a liquid crystal display.
   When the program starts, a message is printed on the display and remains static.
   A second message is printed throughout the execution of the program.
 */
