@@ -1,7 +1,6 @@
 /* 
-  This script is used for a circuit in which i use an ultrasonic sensor to detect the distance from an obstacle.
+  This script is used for a circuit in which i use an Ultrasonic sensor to detect the distance from an obstacle.
   Based on the distance of the obstacle, certain leds are activated.
-
 */
 
 
@@ -11,11 +10,11 @@ void setup(){
 
    // Digital pin 2 is connected to the trigger pin of the Ultrasonic sensor
    // The trigger pin of the Ultrasonic sensor reads an activation signal transmited from the Arduino
-   // Arduino sends an activation signal to trigger pin so digital pin 2 is an output
   pinMode(2,OUTPUT);  
 
   // Digital pin 4 is connected to the echo pin 
-  // The Echo pin of the Ultrasonic sensor takes the information about the distacle of the obstacle                     
+  // The Echo pin of the Ultrasonic sensor calaculates the time it takes for the  ultrasonic
+  // signal to leave and return from the obstacle                    
   pinMode(4,INPUT);                         
   for(int i = 0; i < 3; i++) {
     pinMode(LEDpins[i],OUTPUT);         // Set the led pins to OUTPUT
@@ -33,7 +32,6 @@ void loop(){
 long dis(int TrigPin, int EchoPin){
   
 
-  // We use an activation signal to activate the sensor and transmit pulses
   // Activation signal -------------
   digitalWrite(TrigPin,LOW);
   delayMicroseconds(2);
@@ -44,8 +42,7 @@ long dis(int TrigPin, int EchoPin){
   // -------------------------------
   
 
-  // Arduino reads the Echo signal from the sensor through an input digital pin.
-  // The Echo signal is a pulse which indicates the time it took for the signal to leave and return from the obstacle
+  // Arduino reads the Echo signal from the ultrasonic sensor through an input digital pin.
   long Duration = pulseIn(EchoPin, HIGH);             
   return microsecondsToCentimeters(Duration);         
 }
