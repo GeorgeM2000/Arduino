@@ -1,9 +1,9 @@
 /*
- *  This script is used for a circuit in which i use a liquidCrystal and three buttons.
- *  When the first button is pressed text appears on the screen. The text is stored in 
- *  the variable button1Text. The same thing happens for the other two buttons but with
- *  different text. When each button is pressed, interrupts are triggered and a function
- *  is called.
+   This script is used for a circuit in which i use a liquidCrystal and three buttons.
+   When the first button is pressed text appears on the screen. The text is stored in 
+   the variable button1Text. The same thing happens for the other two buttons but with
+   different text. When each button is pressed, interrupts are triggered and a function
+   is called.
  */
 
 #include <PinChangeInterrupt.h>
