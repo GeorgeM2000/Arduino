@@ -30,11 +30,7 @@ String button3Text = "2000";
 
 void setup()
 {
-    analogWrite(8, Contrast);
-    
-    pinMode(button1, INPUT);
-    pinMode(button2, INPUT);
-    pinMode(button3, INPUT);
+    analogWrite(8, Contrast);     // Set the contrast of the LCD screen
     
     lcd.begin(16,2);    // Specify how large the screen is
     attachInterrupt(digitalPinToInterrupt(button1), buttonForName, CHANGE);                  // Attach an interrupt to button 1 
