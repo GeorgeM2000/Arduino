@@ -6,18 +6,25 @@
 
 #define GREEN 23
 #define RED 22
+#define BLUE 24
+
 
 BLEService bike_fall_service("5321");
 BLEBoolCharacteristic bike_fall_detection_bool("0001", BLERead | BLENotify);
 
 unsigned long fall_time;
 bool cancel_fall_state = false;
+bool fall_detected = false;
+bool ble_signal_sent = false;
+bool timer_started = false;
 
 
 void setup() {
 
   // Initialize LED
   pinMode(GREEN, OUTPUT);
+  pinMode(RED, OUTPUT);
+  pinMode(BLUE, OUTPUT);
   
   // Check if IMU is working properly.
   if(!IMU.begin()) {
@@ -58,24 +65,21 @@ void setup() {
 }
 
 void cancel_fall() {
-  // Turn on red LED for 1 second and turn it off.
-  digitalWrite(RED, HIGH);
-  delay(1000);
-  digitalWrite(RED, LOW);
+  // Turn off the green LED
+  digitalWrite(GREEN, HIGH);
 
-  // Turn off the green LED and cancel the fall.
-  digitalWrite(GREEN, LOW);
-  cancel_fall = true;
+  // Turn on red LED for 1 second and turn it off.
+  digitalWrite(RED, LOW);
+  delay(3000);
+  digitalWrite(RED, HIGH);
+
+  // Cancel the fall.
+  cancel_fall_state = true;
 }
 
 void loop() {
 
   BLEDevice central = BLE.central();
-
-  bool fall_detected;
-  bool ble_signal_sent;
-  bool timer_started;
-  
   
   // Initialize accelerometer X,Y and Z axis values.
   float Ax, Ay, Az;
@@ -87,7 +91,7 @@ void loop() {
     IMU.readAcceleration(Ax, Ay, Az);
 
     // Check if Y axis value is above a custom threshold.
-    if(abs(Ay) > 0.6 && !cancel_fall) {
+    if(abs(Ay) > 0.8 && !cancel_fall_state) {
 
       // If it is, a fall has been detected.
       fall_detected = true;
@@ -95,7 +99,7 @@ void loop() {
       if (central){
         
         // Turn on LED.
-        digitalWrite(GREEN, HIGH);
+        digitalWrite(GREEN, LOW);
 
         // If the timer has not started.
         if(!timer_started){
@@ -109,10 +113,20 @@ void loop() {
         // If a BLE signal has not been sent and 30 seconds have passed.
         if(millis() - fall_time > 30 * 1000.0 && !ble_signal_sent) {
 
+          // Turn off the green LED
+          digitalWrite(GREEN, HIGH);
+
+          // Turn on the blue led
+          digitalWrite(BLUE, LOW);
+
           // Send a BLE signal, set "ble_signal_sent" to true and turn off the green led.
           ble_signal_sent = true;
-          digitalWrite(GREEN, LOW);
-          sendHelpDetectionBool.writeValue(fall_detected);       
+          bike_fall_detection_bool.writeValue(fall_detected);     
+
+          delay(3000);
+
+          // Turn on the blue led
+          digitalWrite(BLUE, HIGH);       
           
         } 
         else {
@@ -146,6 +160,10 @@ void loop() {
     } 
     // If Y axis value is greater than 0.0 and less than 0.6.
     else if(Ay > 0.0 && Ay < 0.6){
+
+      digitalWrite(BLUE, HIGH);
+      digitalWrite(RED, HIGH);
+      digitalWrite(GREEN, HIGH);
 
       // Set below variables to false.
       fall_detected = false;
