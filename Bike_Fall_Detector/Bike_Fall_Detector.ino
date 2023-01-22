@@ -1,3 +1,10 @@
+/*
+  The bike fall detector is an application that detects and alerts people when an accident occurs. You can find the application here https://github.com/GeorgeM2000/Bike-Fall-Detector
+  This application uses the Arduino Nano 33 BLE(Bluetooth Low Energy) Sense board to detect accidents. When an accident is detected, the BLE functionality 
+  embedded in the board sends a bluetooth signal to the application. An accident occurs when the bike leans far left or right enough so that a threshold is surpassed.
+  When an accident is detected, the user has 30 seconds to disable the BLE signal by waving his/her hand above the Arduino board.
+*/
+
 // Libraries
 #include <Arduino_LSM9DS1.h>
 #include <ArduinoBLE.h>
