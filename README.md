@@ -1,11 +1,9 @@
-# Arduino Mini Projects
+# Arduino Projects
 
 ---
 
-# Description
-
-This repository contains arduino related content and projects. The description for each project
-is present in the folders.
+This repository contains simple Arduino projects. The description for each project
+is present in the corresponding folder.
 
 
 
