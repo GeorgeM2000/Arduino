@@ -132,7 +132,7 @@ void loop() {
 
           delay(3000);
 
-          // Turn on the blue led
+          // Turn off the blue led
           digitalWrite(BLUE, HIGH);       
           
         } 
